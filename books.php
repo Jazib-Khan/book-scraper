@@ -8,6 +8,6 @@ $client = new Client();
 
 $crawler = $client->request('GET', 'https://books.toscrape.com/');
 
-echo $crawler->html();
+echo $crawler->filterXPath('//title')->text();
 
 ?>
