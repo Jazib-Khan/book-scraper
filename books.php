@@ -4,10 +4,15 @@ require 'vendor/autoload.php';
 
 use Goutte\Client;
 
-$client = new Client();
+function scrapePage($url, $client){
+    $crawler = $client->request('GET', url);
+    $crawler->filter('.product_pod')->each(function ($node){
+        $title = $node->filter('.image_container img')->attr('alt');
+        $price = $node->filter('.price_color')->text();
 
-$crawler = $client->request('GET', 'https://books.toscrape.com/');
+        echo $title . "-" . $price . PHP_EOL;
+    });
+}
 
-echo $crawler->filterXPath('//title')->text();
 
 ?>
